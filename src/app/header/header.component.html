@@ -1,0 +1,14 @@
+<div class='container'>
+  <form [formGroup]="searchForm">
+    
+        <select  formControlName="sortOption"   >
+            <option *ngFor="let sortBy of sortOptionData" [value]="sortBy" >{{ sortBy }}</option>
+        </select>  
+        <div class="form-inputs">
+        <input type="text" class="" formControlName="searchString" placeholder="Search">
+        <button  name="Search" (click)="search()" >Search</button>
+      </div>
+      
+      
+  </form>
+</div>

@@ -1,0 +1,15 @@
+.container{
+    .row{
+        display: flex;
+        justify-content: space-between;
+        &:nth-child(even) {
+            background-color: #dddddd;
+        }
+        div{
+            border:1px solid lightgray;
+            padding: 10px 5px;
+            flex: 0 50%;
+        }
+    }
+    
+}
