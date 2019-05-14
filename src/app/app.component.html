@@ -1,7 +1,10 @@
 <div class="container">
     <app-header (searchEvent)='handleSearch($event)'></app-header>
     <div class="results">
-        <ng-container *ngFor="let user of users">
+            <div class="total">
+                    Total Results : {{ totalCount }}
+                </div>
+        <ng-container *ngFor="let user of sortedUsers">
            <app-details-card [user]="user"></app-details-card> 
         </ng-container>
     <div>

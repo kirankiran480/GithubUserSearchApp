@@ -12,4 +12,6 @@ export class DetailsTableComponent implements OnInit {
   ngOnInit() {
   }
 
+ 
+
 }

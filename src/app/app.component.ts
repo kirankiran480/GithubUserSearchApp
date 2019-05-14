@@ -9,6 +9,8 @@ import { GitthubApiService } from './gitthub-api.service';
 export class AppComponent {
   title = 'github-search-app';
   users: any;
+  sortedUsers:any;
+  totalCount: number;
    constructor(private gitthubApiService:GitthubApiService){
 
    }
@@ -16,11 +18,17 @@ export class AppComponent {
   public handleSearch(formValues)
   {
     this.gitthubApiService.getGithubUserList(formValues.searchTerm).subscribe((response)=>{
-      console.log(response);
+      this.totalCount = response.total_count;
       this.users = response.items;
+      this.sortedUsers = this.sortBy(formValues.sortType,response.items);
     },(error)=>{
       console.log(error);
     })
+  }
+
+  public sortBy(sortType,items)
+  {
+      return items;
   }
 
 }

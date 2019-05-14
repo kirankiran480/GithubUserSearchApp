@@ -1,5 +1,7 @@
 .container{
     background: #f8f8fa;
+    display: flex;
+    flex-direction: column;
     .results{
         display: flex;
         flex-direction: column;
