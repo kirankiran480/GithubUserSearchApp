@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { GitthubApiService } from './gitthub-api.service';
-
+import { sortOptionData } from './constants';
+import { Subject } from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,24 +12,77 @@ export class AppComponent {
   users: any;
   sortedUsers:any;
   totalCount: number;
+  sortType: sortOptionData = sortOptionData.sortByNameAsc;
+  
    constructor(private gitthubApiService:GitthubApiService){
 
+   }
+
+   ngOnInit()
+   {
+       this.gitthubApiService.invokeSubjectEvent().subscribe((sortType)=>{
+         this.sortType = sortType;
+        if(this.sortedUsers)
+        {
+          this.sortBy(sortType);
+        }
+       });
    }
 
   public handleSearch(formValues)
   {
     this.gitthubApiService.getGithubUserList(formValues.searchTerm).subscribe((response)=>{
       this.totalCount = response.total_count;
-      this.users = response.items;
-      this.sortedUsers = this.sortBy(formValues.sortType,response.items);
+      this.sortedUsers = response.items;
+      this.sortBy(formValues.sortType);
     },(error)=>{
       console.log(error);
     })
   }
 
-  public sortBy(sortType,items)
+  public sortBy(sortType)
   {
-      return items;
+    
+      switch(sortType){
+        case sortOptionData.sortByNameAsc:
+        this.sortedUsers.sort((a,b)=>{
+          let nameA,nameB;
+          nameA=a['login'].toLowerCase(), nameB=b['login'].toLowerCase();
+          if (nameA < nameB) 
+              return -1 
+          if (nameA > nameB)
+              return 1
+          return 0  
+          }); 
+        break;
+        case sortOptionData.sortByNameDsc:
+       this.sortedUsers.sort((a,b)=>{
+        let nameA,nameB;
+        nameA=b['login'].toLowerCase(), nameB=a['login'].toLowerCase();
+        if (nameA < nameB) 
+            return -1 
+        if (nameA > nameB)
+            return 1
+        return 0  
+        }); 
+        break;
+        case sortOptionData.sortByRankAsc:
+         this.sortedUsers.sort((a, b) => parseFloat(a.score) - parseFloat(b.score)); 
+         break;
+        case sortOptionData.sortByRankDsc:
+         this.sortedUsers.sort((a, b) => parseFloat(b.score) - parseFloat(a.score)); 
+         break;
+      }
+  }
+
+  public sortAlphabetically(a,b,key){
+    let nameA,nameB;
+    nameA=a[key].toLowerCase(), nameB=b[key].toLowerCase();
+    if (nameA < nameB) //sort string ascending
+        return -1 
+    if (nameA > nameB)
+        return 1
+    return 0 //default return value (no sorting)
   }
 
 }

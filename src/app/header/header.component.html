@@ -1,6 +1,5 @@
 <div class='container'>
   <form [formGroup]="searchForm">
-    
         <select  formControlName="sortOption"   >
             <option *ngFor="let sortBy of sortOptionData" [value]="sortBy" >{{ sortBy }}</option>
         </select>  
@@ -10,7 +9,5 @@
           <img src="../../assets/search-icon-glass.png" width="10px" height="10px">
         </button>
       </div>
-      
-      
   </form>
 </div>

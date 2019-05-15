@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import {  HttpClient } from '@angular/common/http';
 
 
 @Injectable()
 export class GitthubApiService {
+  public invokeEvent:Subject<any> = new Subject();
   private apiServer: string = "https://api.github.com";
   constructor(private httpClient: HttpClient) {
    
@@ -20,5 +21,9 @@ export class GitthubApiService {
     
     return this.httpClient
     .get(reposUrl)
+  }
+
+  public invokeSubjectEvent(){
+    return this.invokeEvent;
   }
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
-
 import { EventEmitter } from '@angular/core';
+import { sortOptionData } from '../constants';
+import { GitthubApiService } from '../gitthub-api.service';
 
 @Component({
   selector: 'app-header',
@@ -11,16 +12,19 @@ import { EventEmitter } from '@angular/core';
 export class HeaderComponent implements OnInit {
   public sortOptionData:any;
   public searchForm: FormGroup = this.builder.group({
-    sortOption: ['Sort By Name A-Z',Validators.required],
+    sortOption: [sortOptionData.sortByNameAsc,Validators.required],
     searchString: ['',Validators.required]
     });
     @Output() searchEvent = new EventEmitter();
-  constructor(private builder: FormBuilder) { 
-
+  constructor(private builder: FormBuilder,private gitubApiService:GitthubApiService) { 
+   
   }
 
   ngOnInit() {
-    this.sortOptionData = ['Sort By Name A-Z','Sort By Name Z-A','Rank increasing','Rank decreasing'];
+    this.sortOptionData = [sortOptionData.sortByNameAsc,sortOptionData.sortByNameDsc,sortOptionData.sortByRankAsc,sortOptionData.sortByRankDsc];
+    this.searchForm.controls['sortOption'].valueChanges.subscribe(()=>{
+               this.gitubApiService.invokeSubjectEvent().next(this.searchForm.get('sortOption').value);
+    })
   }
 
   public search()
@@ -29,7 +33,6 @@ export class HeaderComponent implements OnInit {
       sortType: this.searchForm.get('sortOption').value,
       searchTerm: this.searchForm.get('searchString').value
     }
-
      this.searchEvent.emit(formValues);
   }
 
