@@ -7,12 +7,14 @@ import { DetailsCardComponent } from './details-card/details-card.component';
 import { DetailsTableComponent } from './details-table/details-table.component';
 import { GitthubApiService } from './gitthub-api.service';
 import { HttpClientModule } from '@angular/common/http';
+import { PaginateComponent } from './paginate/paginate.component';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     DetailsCardComponent,
-    DetailsTableComponent
+    DetailsTableComponent,
+    PaginateComponent
   ],
   imports: [
     BrowserModule,

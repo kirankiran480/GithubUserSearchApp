@@ -6,13 +6,12 @@ import {  HttpClient } from '@angular/common/http';
 @Injectable()
 export class GitthubApiService {
   public invokeEvent:Subject<any> = new Subject();
-  private apiServer: string = "https://api.github.com";
   constructor(private httpClient: HttpClient) {
    
    }
 
-  public getGithubUserList(term=''):Observable<any>{
-    const url = 'https://api.github.com/search/users?q=' + term;
+  public getGithubUserList(term='',pageNumber=1,recordsPerPage=10):Observable<any>{
+    const url = 'https://api.github.com/search/users?q=' + term+'&page='+pageNumber+'&per_page='+recordsPerPage;
     return this.httpClient
     .get(url)
   }

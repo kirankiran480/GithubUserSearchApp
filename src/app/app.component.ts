@@ -13,7 +13,9 @@ export class AppComponent {
   sortedUsers:any;
   totalCount: number;
   sortType: sortOptionData = sortOptionData.sortByNameAsc;
-  
+  formValues: any;
+  currentPage = 1;
+  recordsPerPage:10;
    constructor(private gitthubApiService:GitthubApiService){
 
    }
@@ -31,15 +33,35 @@ export class AppComponent {
 
   public handleSearch(formValues)
   {
-    this.gitthubApiService.getGithubUserList(formValues.searchTerm).subscribe((response)=>{
-      this.totalCount = response.total_count;
-      this.sortedUsers = response.items;
-      this.sortBy(formValues.sortType);
-    },(error)=>{
-      console.log(error);
-    })
+    this.formValues = formValues;
+    if(formValues.searchTerm)
+    {
+      this.gitthubApiService.getGithubUserList(formValues.searchTerm).subscribe((response)=>{
+        this.totalCount = response.total_count;
+        this.sortedUsers = response.items;
+        this.sortBy(formValues.sortType);
+        this.currentPage=1;
+      },(error)=>{
+        console.log(error);
+      })
+    }
+    
   }
 
+  public handlepagination(pageNumber)
+  {
+    this.currentPage = pageNumber;
+    if(this.formValues.searchTerm)
+    {
+      this.gitthubApiService.getGithubUserList(this.formValues.searchTerm,pageNumber,this.recordsPerPage).subscribe((response)=>{
+        this.totalCount = response.total_count;
+        this.sortedUsers = response.items;
+        this.sortBy(this.formValues.sortType);
+      },(error)=>{
+        console.log(error);
+      })
+    }
+  }
   public sortBy(sortType)
   {
     

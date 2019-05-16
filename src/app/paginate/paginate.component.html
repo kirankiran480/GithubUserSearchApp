@@ -1,0 +1,9 @@
+<ul class="container">
+  <a href="#" (click)="previous()" *ngIf="currentPage!==1">&#60;</a>
+   <li *ngFor="let page of shownPages">
+      <a href="#"  (click)="getResults(page)">
+         {{page}}
+      </a>
+   </li>
+   <a href="#" *ngIf="currentPage!==totalPages" (click)="next()" >&#62;</a>
+</ul>

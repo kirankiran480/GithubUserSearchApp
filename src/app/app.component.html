@@ -7,6 +7,7 @@
         <ng-container *ngFor="let user of sortedUsers">
            <app-details-card [user]="user"></app-details-card> 
         </ng-container>
-    <div>
+    </div>
+    <app-paginate *ngIf="sortedUsers" [totalRecords]="totalCount" [recordsPerPage]="recordsPerPage" [currentPage]="currentPage" (handleClick)="handlepagination($event)" ></app-paginate>
 </div>
 
