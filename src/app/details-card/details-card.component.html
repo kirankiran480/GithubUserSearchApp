@@ -14,7 +14,7 @@
                  <div>
                     <label>Type:</label> {{user.type}}
                  </div>
-                 <a class="btn btn-primary outline" *ngIf="!isOpened" (click)="getUserRepoDetails(user.repos_url)">Details</a>
+                 <a class="btn btn-primary outline" *ngIf="!isOpened" (click)="getUserRepoDetails(user.reposUrl)">Details</a>
                  <a class="btn btn-primary outline" *ngIf="isOpened" (click)="isOpened=!isOpened">Collapse</a>
                 </div>
             </div>
