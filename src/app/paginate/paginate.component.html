@@ -1,9 +1,9 @@
 <ul class="container" *ngIf="totalPages>1">
-  <a href="#" (click)="previous()" *ngIf="!(currentPage <= countPerSet)">&#60;</a>
+  <a href="#" (click)="previous();$event.preventDefault();" *ngIf="!(currentPage <= countPerSet)">&#60;</a>
    <li *ngFor="let page of shownPages">
-      <a href="#"  [ngClass]="{'active': currentPage === page}" (click)="getResults(page)">
+      <a href="#"  [ngClass]="{'active': currentPage === page}" (click)="getResults(page);$event.preventDefault();">
          {{page}}
       </a>
    </li>
-   <a href="#" *ngIf="!(currentPage>=(totalPages-countPerSet))" (click)="next()" >&#62;</a>
+   <a href="#" *ngIf="!(currentPage>=(totalPages-countPerSet))" (click)="next();$event.preventDefault();" >&#62;</a>
 </ul>
