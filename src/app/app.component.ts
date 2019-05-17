@@ -33,7 +33,6 @@ export class AppComponent implements OnInit {
     this.formValues = formValues;
     if (formValues.searchTerm) {
       this.gitthubApiService.getGithubUserList(formValues.searchTerm).subscribe((response) => {
-        console.log(response);
         this.totalCount = response.totalCount;
         this.sortedUsers = response.users;
         this.sortBy(formValues.sortType);
