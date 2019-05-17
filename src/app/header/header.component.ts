@@ -10,30 +10,30 @@ import { GitthubApiService } from '../gitthub-api.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  public sortOptionData:any;
+  public sortOptionData: sortOptionData[];
   public searchForm: FormGroup = this.builder.group({
-    sortOption: [sortOptionData.sortByNameAsc,Validators.required],
-    searchString: ['',Validators.required]
+    sortOption: [sortOptionData.sortByNameAsc, Validators.required],
+    searchString: ['', Validators.required]
     });
     @Output() searchEvent = new EventEmitter();
-  constructor(private builder: FormBuilder,private gitubApiService:GitthubApiService) { 
-   
+  constructor(private builder: FormBuilder, private gitubApiService: GitthubApiService) {
+
   }
 
   ngOnInit() {
-    this.sortOptionData = [sortOptionData.sortByNameAsc,sortOptionData.sortByNameDsc,sortOptionData.sortByRankAsc,sortOptionData.sortByRankDsc];
-    this.searchForm.controls['sortOption'].valueChanges.subscribe(()=>{
+    this.sortOptionData = [sortOptionData.sortByNameAsc,
+      sortOptionData.sortByNameDsc, sortOptionData.sortByRankAsc, sortOptionData.sortByRankDsc];
+    this.searchForm.controls.sortOption.valueChanges.subscribe(() => {
                this.gitubApiService.invokeSubjectEvent().next(this.searchForm.get('sortOption').value);
-    })
+    });
   }
 
-  public search()
-  { 
+  public search() {
     const formValues = {
       sortType: this.searchForm.get('sortOption').value,
       searchTerm: this.searchForm.get('searchString').value
-    }
-     this.searchEvent.emit(formValues);
+    };
+    this.searchEvent.emit(formValues);
   }
 
 }

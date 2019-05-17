@@ -1,27 +1,24 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { GitthubApiService } from '../gitthub-api.service';
+import { UserData, Repo, User } from '../userData.model';
 
 @Component({
   selector: 'app-details-card',
   templateUrl: './details-card.component.html',
   styleUrls: ['./details-card.component.scss']
 })
-export class DetailsCardComponent implements OnInit {
-  @Input() user:any;
-  isOpened:boolean = false;
-  repoList: any;
-  constructor(private gitthubApiService : GitthubApiService) { }
+export class DetailsCardComponent  {
+  @Input() public user: User;
+  public isOpened = false;
+  public repoList: Repo[];
+  constructor(private gitthubApiService: GitthubApiService) { }
 
-  ngOnInit() {
-  }
-
-  getUserRepoDetails(reposUrl)
-  {
-    this.gitthubApiService.getUserDetails(reposUrl).subscribe((response)=>{
+public getUserRepoDetails(reposUrl: string) {
+    this.gitthubApiService.getUserDetails(reposUrl).subscribe((response: Repo[]) => {
       this.repoList = response;
       this.isOpened = true;
-    },(error)=>{
-
+    }, (error) => {
+        console.log(error);
     });
   }
 
