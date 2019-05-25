@@ -1,13 +1,12 @@
 <div class='container'>
   <form [formGroup]="searchForm">
-        <select  formControlName="sortOption"   >
+        <select  class="form-inputs" formControlName="sortOption"   >
             <option *ngFor="let sortBy of sortOptionData" [value]="sortBy" >{{ sortBy }}</option>
-        </select>  
-        <div class="form-inputs">
-        <input type="text" class="" formControlName="searchString" placeholder="Search">
-        <button  name="Search" (click)="search()" >
+        </select>
+        <input type="text" class="form-inputs" formControlName="searchString" placeholder="Search">
+        <button  name="Search" (click)="search()" class="form-inputs">
           <img src="../../assets/search-icon-glass.png" width="10px" height="10px">
         </button>
-      </div>
+
   </form>
 </div>

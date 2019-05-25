@@ -1,6 +1,7 @@
 .card{
   border: 1px solid lightgrey;
-  border-bottom: 2px solid grey;
+  padding:20px;
+  border-radius: 5px;
   width: inherit;
   margin-top:5px;
   background: white;
@@ -84,10 +85,10 @@
                 color: #fff;
                 background-color: #337ab7;
             }
-        }       
+        }
     }
    }
-    
+
 
 }
 

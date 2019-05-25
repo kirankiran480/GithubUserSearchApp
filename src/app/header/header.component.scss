@@ -1,42 +1,35 @@
 .container{
   form{
-    background-color: deepskyblue;
+    background-color: #0077B5;
     height: 50px;
     justify-content:center;
     align-items: center;
     width: auto;
     display:flex;
     padding:5px;
-    select{
-      height: 25px;
-      margin:5px
+    select.form-inputs{
+      border-radius: 5px;
+      padding-top:9px;
+      padding-bottom:9px;
     }
     .form-inputs{
-      height: 25px;
+      padding: 10px;
       margin:5px;
-         input{
-          border: 0;
-          padding: 0px;
-          background: #fff;
-          border-radius: 5px 0 0 5px;
-          height: inherit;
-            &::placeholder {
-              color: grey;
-            }
-         }
-        button{
-          width: 20px;
-          border-radius: 0 5px 5px 0px;
-          border:none;
-          height: 25px;
-          align-items: flex-start;
-          text-align: center;
-          cursor: default;
-          background-color: white;
-          box-sizing: border-box;
-          padding: 0px;
-        }
+      border:none;
+      &:focus{
+        outline: none;
+      }
+    }
+    input.form-inputs{
+      border-radius: 5px 0 0px 5px;
+      margin-right: 0px;
+    }
+    button.form-inputs{
+      border-radius: 0px 5px 5px 0px;
+      margin-left: 0px;
+      margin-right: 0px;
+      background: white;
     }
   }
- 
+
 }
