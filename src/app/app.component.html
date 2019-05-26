@@ -1,13 +1,13 @@
 <div class="container">
-    <app-header (searchEvent)='handleSearch($event)'></app-header>
-    <div class="results">
-            <div class="total">
-                    Total Results : {{ totalCount }}
-                </div>
-        <ng-container *ngFor="let user of sortedUsers">
-           <app-details-card [user]="user"></app-details-card> 
-        </ng-container>
+  <app-header (searchEvent)='handleSearch($event)'></app-header>
+  <div class="results">
+    <div class="total">
+      Total Results : {{ totalCount }}
     </div>
-    <app-paginate *ngIf="sortedUsers" [totalRecords]="totalCount" [recordsPerPage]="recordsPerPage" [currentPage]="currentPage" (handleClick)="handlepagination($event)" ></app-paginate>
+    <ng-container *ngFor="let user of sortedUsers">
+      <app-details-card [user]="user"></app-details-card>
+    </ng-container>
+    <app-paginate *ngIf="sortedUsers" [totalRecords]="totalCount" [recordsPerPage]="recordsPerPage"
+      [currentPage]="currentPage" (handleClick)="handlepagination($event)"></app-paginate>
+  </div>
 </div>
-
