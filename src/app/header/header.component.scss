@@ -1,8 +1,9 @@
 .container{
+  background-color: #0077B5;
   form{
-    background-color: #0077B5;
+    margin: 0px 20% 0px 20%;
     height: 50px;
-    justify-content:center;
+    justify-content:flex-start;
     align-items: center;
     width: auto;
     display:flex;
@@ -11,6 +12,8 @@
       border-radius: 5px;
       padding-top:9px;
       padding-bottom:9px;
+      margin-right: 50px;
+      margin-left:0px;
     }
     .form-inputs{
       padding: 10px;
